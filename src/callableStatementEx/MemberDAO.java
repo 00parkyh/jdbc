@@ -97,13 +97,15 @@ public class MemberDAO {
         conn = DBUtil.getConnection();
         List<Board> boardList = new ArrayList<>();
         String sql = "{call SP_MEMBER_LIST_ONE(?)}";
-        System.out.println("조회하고 싶은 아이디를 입력하세요 : ");
+        System.out.print("조회하고 싶은 아이디를 입력하세요 : ");
         String m_userid = sc.nextLine();
 
         try(CallableStatement call = conn.prepareCall(sql)){
-            ResultSet rs = call.executeQuery();
             call.setString(1,m_userid);
+            ResultSet rs = call.executeQuery();
+
             while(rs.next()) {
+
                 int seq = rs.getInt(1);
                 String userid = rs.getString(2);
                 String pwd = rs.getString(3);
@@ -137,7 +139,7 @@ public class MemberDAO {
 //        join();
 
 //        selectAll();
-        selectONE();
+//        selectONE();
 
     }
 }
